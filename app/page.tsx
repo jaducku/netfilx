@@ -1,11 +1,14 @@
 import { Button } from '@/components/ui/button'
+import { getServerSession } from 'next-auth'
 import Image from 'next/image'
+import { authOptions } from './utils/auth'
 
-export default function Home() {
+export default async function Home() {
+  const session = await getServerSession(authOptions);
   return (
-    <div>
-      <h1>Hello RW</h1>
-      <Button>Login</Button>
+    <div className='m-5'>
+        <Button>Hello from shadcn/ui</Button>
+        <h1>{session?.user?.name}</h1>
     </div>
   )
 }
