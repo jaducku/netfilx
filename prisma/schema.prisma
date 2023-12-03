@@ -81,3 +81,8 @@ model VerificationToken {
   @@unique([identifier, token])
 }
 
+model Menu {
+  id String @id @default(uuid())
+  name String
+  uri String
+}

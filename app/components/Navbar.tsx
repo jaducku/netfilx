@@ -5,24 +5,32 @@ import Logo from '../../public/netfilx_logo.svg'
 import { usePathname } from "next/navigation";
 import { Search, Bell } from "lucide-react"
 import UserNav from "./UserNav";
+import prisma from "../utils/db"
 
 interface linkProps {
     name: string;
-    href: string
+    uri: string
 }
 
-// Get Menu from DB
-const links : linkProps[] = [
-    {name: "Home", href: '/home'},
-    {name: "Tv Shows", href: '/home/shows'},
-    {name: "Movies", href: '/home/movies'},
-    {name: "Recently Added", href: '/home/recently'},
-    {name: "My List", href: '/home/user/list'},
-];
+async function getMenus() {
+    const data = await prisma.menu.findMany({
+        select:{
+            id : true,
+            name: true,
+            uri: true,
+        },
+        orderBy:{
+            id: 'asc',
+        },
+    });
+    return data;
+}
 
-export default function Navbar(){
+export default async function Navbar(){
     const pathName = usePathname();
     
+    const links : linkProps[] = await getMenus();
+
     return (
         <div className="w-full max-w-7xl mx-auto items-center justify-between px-5 sm:px-6 py-5 lg:px-8 flex">
             <div className="flex items-center">
@@ -32,10 +40,10 @@ export default function Navbar(){
                 <ul className="lg:flex gap-x-4 ml-14 hidden">
                     {links.map((link,idx) => (
                         <div key={idx}>
-                            {pathName === link.href ? (
+                            {pathName === link.uri ? (
                                 <li>
                                     <Link 
-                                        href={link.href} 
+                                        href={link.uri} 
                                         className="text-white font-semibold underline text-sm">
                                         {link.name}
                                     </Link> 
@@ -43,7 +51,7 @@ export default function Navbar(){
                             ):(
                                 <li>
                                     <Link 
-                                        href={link.href}
+                                        href={link.uri}
                                         className="text-gray-300 font-normal text-sm"
                                     >{link.name}</Link> 
                                 </li>
