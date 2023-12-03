@@ -4,10 +4,8 @@ import { redirect } from 'next/navigation';
 
 export default async function Home() {
   const session = await getServerSession(authOptions);
-  if(!session){
-    return redirect("/login");
-  }else{
-    return redirect("/home");
-  }
+  const uri = !session ? "/login" : "/home";
+  
+  return redirect(uri);
 }
  

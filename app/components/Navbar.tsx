@@ -1,7 +1,7 @@
 "use client"
 import Image from "next/image";
 import Link from "next/link";
-import Logo from '../../public/Netfilx_logo.png'
+import Logo from '../../public/netfilx_logo.svg'
 import { usePathname } from "next/navigation";
 import { Search, Bell } from "lucide-react"
 import UserNav from "./UserNav";
@@ -11,6 +11,7 @@ interface linkProps {
     href: string
 }
 
+// Get Menu from DB
 const links : linkProps[] = [
     {name: "Home", href: '/home'},
     {name: "Tv Shows", href: '/home/shows'},

@@ -14,8 +14,8 @@ export default async function Login() {
     }
     return (
         <div className="mt-24 rounded bg-black/80 py-10 px-6 md:mt-0 md:max-w-sm md:px-14">
-            <form>
-                <h1 className="text-3xlfont-semibold text-white">Log In</h1>
+            <form method="post" action="/api/auth/signin">
+                <h1 className="text-3xl justify-center font-semibold text-white">Log In</h1>
                 <div className="space-y-4 mt-5">
                     <Input type="email" name="email" placeholder="E-Mail" className="bg-[#333] placeholder:text-xs placeholder:text-gray-400 w-full inline-block"/>
                     <Button type="submit"
