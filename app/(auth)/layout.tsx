@@ -1,7 +1,8 @@
 import Image from "next/image";
 import { ReactNode } from "react";
 import BackgroundImage from '../../public/background.png'
-import Logo from '../../public/Netfilx_logo.png'
+import Logo from '../../public/netfilx_logo.svg'
+
 
 export default function AuthLayout({children}: {children: ReactNode}){
     return (
